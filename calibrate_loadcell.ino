@@ -5,6 +5,10 @@
 //縦軸が重さ、横軸がアナログ値となるようにグラフ作成
 //直線近似する
 //重さ＝f(アナログ値)
+float analog_to_weight_g(float analog_value)
+{
+  return 38.187 * analog_value - 9470.5;
+}
 
 void setup()
 {
@@ -13,6 +17,10 @@ void setup()
 
 void loop()
 {
-  Serial.println(analogRead(A0));
-  delay(500);
+  float value = analogRead(A0);
+  float weight = analog_to_weight_g(value);
+  Serial.print(weight);
+  Serial.print(", ");
+  Serial.println(value);
+  delay(100);
 }
